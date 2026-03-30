@@ -68,7 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         let menu = NSMenu()
 
-        let openItem = NSMenuItem(title: "Open Management", action: #selector(openManagement), keyEquivalent: "o")
+        let openItem = NSMenuItem(title: "Hazel", action: #selector(openManagement), keyEquivalent: "h")
         openItem.target = self
         menu.addItem(openItem)
 
