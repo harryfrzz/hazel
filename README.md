@@ -1,6 +1,8 @@
-# Hazel
 
-A macOS live wallpaper app that plays videos as your desktop background.
+<img width="5136" height="904" alt="hazel_banner" src="https://github.com/user-attachments/assets/93bfc851-540f-4331-a227-e27c9f1f2929" />
+
+## What's Hazel?
+A free & open source macOS live wallpaper app that plays videos as your desktop background.
 
 ## Features
 
