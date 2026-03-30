@@ -9,7 +9,17 @@ struct ManagementView: View {
     @State private var showingFileImporter = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(spacing: 12) {
+            HStack {
+                Spacer()
+                Image("Logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 40)
+                Spacer()
+            }
+            .padding(.top, 12)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
                     AddCard {
@@ -55,7 +65,7 @@ struct ManagementView: View {
                 .padding(.bottom, 16)
             }
         }
-        .frame(width: 600, height: 200)
+        .frame(width: 600, height: 240)
         .background(Color(nsColor: .windowBackgroundColor))
     }
 
@@ -85,10 +95,10 @@ class ManagementWindowController: NSObject {
         }
 
         let hostingView = NSHostingView(rootView: ManagementView(store: store, controller: controller))
-        hostingView.frame = NSRect(x: 0, y: 0, width: 600, height: 200)
+        hostingView.frame = NSRect(x: 0, y: 0, width: 600, height: 240)
 
         let newPanel = NSPanel(
-            contentRect: NSRect(x: 0, y: 0, width: 600, height: 200),
+            contentRect: NSRect(x: 0, y: 0, width: 600, height: 240),
             styleMask: [.titled, .closable, .nonactivatingPanel],
             backing: .buffered,
             defer: false
