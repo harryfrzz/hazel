@@ -5,7 +5,6 @@ import UniformTypeIdentifiers
 // MARK: - Constants
 private enum AppConstants {
     static let githubURL = URL(string: "https://github.com/harryfrzz/hazel")!
-    static let donateURL = URL(string: "https://www.buymeacoffee.com/")!
     static let allowedMovieTypes: [UTType] = [.movie, .mpeg4Movie, .quickTimeMovie]
 }
 
@@ -26,8 +25,7 @@ struct ManagementView: View {
         }
         .padding(.vertical, 20)
         .frame(width: 600, height: 340)
-        // Using a modern macOS material background instead of a flat color
-        .background(Material.regular)
+        .background(Color.black)
     }
     
     // MARK: - Subviews
@@ -45,33 +43,36 @@ struct ManagementView: View {
             VStack(alignment: .trailing, spacing: 12) {
                 Text("Hazel")
                     .font(.custom("GeistPixel-Square", size: 28))
+                    .foregroundColor(.white)
+                
+                Text("v1.1")
+                    .font(.custom("GeistPixel-Square", size: 15))
+                    .foregroundColor(.gray)
                 
                 HStack(spacing: 12) {
                     Link(destination: AppConstants.githubURL) {
-                        Label("GitHub", systemImage: "link")
-                            .font(.subheadline)
+                        Image("GitHubLogo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
                     }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(Color.gray.opacity(0.2))
+                    .padding(8)
+                    .background(Color.white)
                     .cornerRadius(8)
                     .help("Visit the GitHub repository")
-                    
-                    Link(destination: AppConstants.donateURL) {
-                        Label("Donate", systemImage: "heart.fill")
-                            .font(.subheadline)
-                    }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(Color.pink.opacity(0.2))
-                    .foregroundColor(.pink)
-                    .cornerRadius(8)
-                    .help("Support the developer")
                 }
             }
             .padding(.trailing, 20)
         }
         .padding(.top, 20)
+    }
+    
+    private var githubImage: Image {
+        if let url = Bundle.main.url(forResource: "GitHub_Invertocat_Black", withExtension: "png"),
+           let nsImage = NSImage(contentsOf: url) {
+            return Image(nsImage: nsImage)
+        }
+        return Image(systemName: "link")
     }
     
     private var wallpaperScrollView: some View {

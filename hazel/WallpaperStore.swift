@@ -4,7 +4,7 @@ import AppKit
 import Combine
 
 class WallpaperStore: ObservableObject {
-    var wallpapers: [WallpaperItem] = []
+    @Published var wallpapers: [WallpaperItem] = []
     var activeWallpaperID: UUID? {
         didSet {
             if let id = activeWallpaperID {

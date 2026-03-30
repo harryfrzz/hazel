@@ -35,7 +35,10 @@ class VideoPlayerView: NSView {
         }
 
         let asset = AVURLAsset(url: url)
+        
         let playerItem = AVPlayerItem(asset: asset)
+        playerItem.preferredForwardBufferDuration = 2.0
+        
         let queuePlayer = AVQueuePlayer(playerItem: playerItem)
         
         let fit = SettingsManager.shared.wallpaperFit

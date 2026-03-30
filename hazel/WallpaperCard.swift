@@ -40,6 +40,11 @@ struct WallpaperCard: View {
                     RoundedRectangle(cornerRadius: 4)
                         .stroke(Color.accentColor, lineWidth: 3)
                         .frame(width: thumbnailWidth, height: thumbnailHeight)
+                    
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 24))
+                        .foregroundColor(.accentColor)
+                        .background(Circle().fill(Color.black.opacity(0.5)))
                 }
             }
             .frame(width: thumbnailWidth, height: thumbnailHeight)
@@ -47,7 +52,7 @@ struct WallpaperCard: View {
             .onTapGesture(perform: onTap)
 
             Text(item.title)
-                .font(.system(size: 11))
+                .font(Font.custom("GeistPixel-Square", size: 11))
                 .lineLimit(1)
                 .truncationMode(.middle)
                 .frame(width: cardWidth - 16)
@@ -88,13 +93,16 @@ struct AddCard: View {
     private let cardHeight: CGFloat = 140
     private let thumbnailWidth: CGFloat = 140
     private let thumbnailHeight: CGFloat = 79
+    
+    @State private var isHovered = false
 
     var body: some View {
         VStack(spacing: 8) {
             ZStack {
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.gray.opacity(0.2))
+                    .fill(Color.gray.opacity(isHovered ? 0.3 : 0.2))
                     .frame(width: thumbnailWidth, height: thumbnailHeight)
+                    .scaleEffect(isHovered ? 1.05 : 1.0)
 
                 Image(systemName: "plus.circle.fill")
                     .font(.system(size: 32))
@@ -104,14 +112,19 @@ struct AddCard: View {
             .onTapGesture(perform: onTap)
 
             Text("Add Video")
-                .font(.system(size: 11))
+                .font(Font.custom("GeistPixel-Square", size: 11))
                 .foregroundColor(.secondary)
         }
         .frame(width: cardWidth, height: cardHeight)
         .padding(8)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(Color.gray.opacity(0.1))
+                .fill(Color.gray.opacity(isHovered ? 0.2 : 0.1))
         )
+        .onHover { hovering in
+            withAnimation(.easeInOut(duration: 0.15)) {
+                isHovered = hovering
+            }
+        }
     }
 }

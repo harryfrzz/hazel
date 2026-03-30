@@ -8,16 +8,11 @@
 
 /* Begin PBXFileReference section */
 		CC07CB942F7A5ABF004CBB12 /* hazel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hazel.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC07CB992F7A5ABF004CBB13 /* hazel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hazel.entitlements; sourceTree = "<group>"; };
-		GEISTFONT01 /* GeistPixel-Square.otf */ = {isa = PBXFileReference; lastKnownFileType = otfont; path = "GeistPixel-Square.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CC07CB962F7A5ABF004CBB12 /* hazel */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			children = (
-				GEISTFONT01 /* GeistPixel-Square.otf */,
-			);
 			path = hazel;
 			sourceTree = "<group>";
 		};
