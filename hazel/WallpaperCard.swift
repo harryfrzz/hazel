@@ -111,7 +111,7 @@ struct AddCard: View {
             .frame(width: thumbnailWidth, height: thumbnailHeight)
             .onTapGesture(perform: onTap)
 
-            Text("Add Video")
+            Text("Add Wallpaper")
                 .font(Font.custom("GeistPixel-Square", size: 11))
                 .foregroundColor(.secondary)
         }

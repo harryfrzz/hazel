@@ -15,6 +15,8 @@ struct ManagementView: View {
     
     @State private var showingFileImporter = false
     @State private var showingDuplicateAlert = false
+    @State private var showingErrorAlert = false
+    @State private var errorMessage = ""
     @State private var duplicateVideoName = ""
     
     var body: some View {
@@ -26,6 +28,16 @@ struct ManagementView: View {
         .padding(.vertical, 20)
         .frame(width: 600, height: 340)
         .background(Color.black)
+        .alert("Wallpaper Already Exists", isPresented: $showingDuplicateAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("The wallpaper \"\(duplicateVideoName)\" is already in your library.")
+        }
+        .alert("Error", isPresented: $showingErrorAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(errorMessage)
+        }
     }
     
     // MARK: - Subviews
@@ -100,7 +112,6 @@ struct ManagementView: View {
                             if store.activeWallpaperID == item.id {
                                 controller.clearWallpaper()
                             }
-                            // Add slight animation when removing items
                             withAnimation(.easeInOut(duration: 0.2)) {
                                 store.removeWallpaper(item)
                             }
@@ -127,19 +138,28 @@ struct ManagementView: View {
         }
     }
     
-    // MARK: - Actions
     
     private func handleFileImport(_ result: Result<[URL], Error>) {
         switch result {
         case .success(let urls):
             var lastAddedItem: WallpaperItem?
+            var hasDuplicate = false
             
-            // If user imports 5 videos, we don't want to trigger setWallpaper 5 times rapidly.
-            // We add them all, and only set the LAST one as active.
             for url in urls {
+                let fileName = url.deletingPathExtension().lastPathComponent
+                if store.wallpapers.contains(where: { $0.title == fileName }) {
+                    duplicateVideoName = fileName
+                    hasDuplicate = true
+                    continue
+                }
+                
                 if let item = store.addWallpaper(url: url) {
                     lastAddedItem = item
                 }
+            }
+            
+            if hasDuplicate {
+                showingDuplicateAlert = true
             }
             
             if let itemToActivate = lastAddedItem {
@@ -148,8 +168,8 @@ struct ManagementView: View {
             }
             
         case .failure(let error):
-            // In a production app, consider showing an NSAlert or an Alert view here
-            print("File import error: \(error.localizedDescription)")
+            errorMessage = error.localizedDescription
+            showingErrorAlert = true
         }
     }
 }
