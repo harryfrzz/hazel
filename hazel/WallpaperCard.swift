@@ -7,6 +7,7 @@ struct WallpaperCard: View {
     let onTap: () -> Void
     let onRemove: () -> Void
     let onToggleLoop: () -> Void
+    let onToggleMute: () -> Void
 
     @State private var thumbnailImage: NSImage?
 
@@ -59,6 +60,7 @@ struct WallpaperCard: View {
         )
         .contextMenu {
             Button(item.isLooping ? "Disable Loop" : "Enable Loop", action: onToggleLoop)
+            Button(item.isMuted ? "Unmute" : "Mute", action: onToggleMute)
             Divider()
             Button("Remove", role: .destructive, action: onRemove)
         }

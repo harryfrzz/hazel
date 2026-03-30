@@ -110,6 +110,13 @@ struct ManagementView: View {
                                let updatedItem = store.wallpapers.first(where: { $0.id == item.id }) {
                                 controller.setWallpaper(updatedItem)
                             }
+                        },
+                        onToggleMute: {
+                            store.toggleMute(for: item)
+                            if store.activeWallpaperID == item.id,
+                               let updatedItem = store.wallpapers.first(where: { $0.id == item.id }) {
+                                controller.setWallpaper(updatedItem)
+                            }
                         }
                     )
                 }

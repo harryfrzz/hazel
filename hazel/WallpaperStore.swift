@@ -141,6 +141,13 @@ class WallpaperStore: ObservableObject {
             save()
         }
     }
+    
+    func toggleMute(for item: WallpaperItem) {
+        if let index = wallpapers.firstIndex(where: { $0.id == item.id }) {
+            wallpapers[index].isMuted.toggle()
+            save()
+        }
+    }
 
     func resolveBookmark(_ bookmarkURL: URL) -> URL? {
         guard fileManager.fileExists(atPath: bookmarkURL.path) else {

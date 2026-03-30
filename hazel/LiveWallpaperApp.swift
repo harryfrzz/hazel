@@ -56,7 +56,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
         if let button = statusItem?.button {
-            button.image = NSImage(systemSymbolName: "play.rectangle.fill", accessibilityDescription: "Live Wallpaper")
+            if let image = NSImage(named: "Logo") {
+                image.size = NSSize(width: 24, height: 24)
+                button.image = image
+            } else {
+                button.image = NSImage(systemSymbolName: "play.rectangle.fill", accessibilityDescription: "Hazel-Live wallpaper")
+            }
             button.action = #selector(statusItemClicked)
             button.target = self
         }

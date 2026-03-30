@@ -114,7 +114,7 @@ class WallpaperController: ObservableObject {
         }
 
         for (_, entry) in wallpaperWindows {
-            entry.playerView.loadVideo(url: url, isLooping: activeItem.isLooping)
+            entry.playerView.loadVideo(url: url, isLooping: activeItem.isLooping, isMuted: activeItem.isMuted)
         }
     }
 
@@ -145,7 +145,7 @@ class WallpaperController: ObservableObject {
               let url = store.resolveBookmark(activeItem.url) else { return }
         
         for (_, entry) in wallpaperWindows {
-            entry.playerView.loadVideo(url: url, isLooping: activeItem.isLooping)
+            entry.playerView.loadVideo(url: url, isLooping: activeItem.isLooping, isMuted: activeItem.isMuted)
         }
     }
 }

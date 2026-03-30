@@ -7,6 +7,7 @@ class VideoPlayerView: NSView {
     private var playerLayer: AVPlayerLayer?
     private var currentURL: URL?
     private var currentIsLooping: Bool = true
+    private var currentIsMuted: Bool = true
 
     var isPlaying: Bool {
         player?.rate ?? 0 > 0
@@ -22,10 +23,11 @@ class VideoPlayerView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func loadVideo(url: URL, isLooping: Bool = true) {
+    func loadVideo(url: URL, isLooping: Bool = true, isMuted: Bool = true) {
         cleanup()
         currentURL = url
         currentIsLooping = isLooping
+        currentIsMuted = isMuted
 
         var securityScoped = false
         if url.startAccessingSecurityScopedResource() {
@@ -51,6 +53,7 @@ class VideoPlayerView: NSView {
 
         self.player = queuePlayer
         self.playerLayer = layer
+        queuePlayer.isMuted = isMuted
 
         if securityScoped {
             url.stopAccessingSecurityScopedResource()
@@ -59,9 +62,14 @@ class VideoPlayerView: NSView {
         queuePlayer.play()
     }
     
+    func setMuted(_ muted: Bool) {
+        player?.isMuted = muted
+        currentIsMuted = muted
+    }
+    
     func reloadWithSettings() {
         guard let url = currentURL else { return }
-        loadVideo(url: url, isLooping: currentIsLooping)
+        loadVideo(url: url, isLooping: currentIsLooping, isMuted: currentIsMuted)
     }
 
     func play() {
