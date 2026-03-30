@@ -83,8 +83,15 @@ class WallpaperStore: ObservableObject {
 
         defer { url.stopAccessingSecurityScopedResource() }
 
+        let fileName = url.deletingPathExtension().lastPathComponent
+        
+        if wallpapers.contains(where: { $0.title == fileName }) {
+            print("Video already exists: \(fileName)")
+            return nil
+        }
+
         let id = UUID()
-        let title = url.deletingPathExtension().lastPathComponent
+        let title = fileName
         let videoExtension = url.pathExtension
         let destinationURL = videosURL.appendingPathComponent("\(id.uuidString).\(videoExtension)")
 

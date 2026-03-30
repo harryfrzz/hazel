@@ -19,6 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var managementWindowController: ManagementWindowController?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        registerFonts()
+        
         let wallpaperStore = WallpaperStore()
         self.store = wallpaperStore
 
@@ -32,6 +34,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         setupStatusItem()
 
         managementWindowController = ManagementWindowController()
+    }
+    
+    private func registerFonts() {
+        guard let fontURL = Bundle.main.url(forResource: "GeistPixel-Square", withExtension: "otf"),
+              let fontDataProvider = CGDataProvider(url: fontURL as CFURL),
+              let font = CGFont(fontDataProvider) else {
+            print("Failed to load custom font")
+            return
+        }
+        
+        var error: Unmanaged<CFError>?
+        if CTFontManagerRegisterGraphicsFont(font, &error) {
+            print("Custom font registered successfully")
+        } else {
+            print("Failed to register custom font: \(error?.takeRetainedValue().localizedDescription ?? "unknown error")")
+        }
     }
 
     private func setupStatusItem() {

@@ -1,0 +1,12 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "fonts" : [
+    {
+      "filename" : "GeistPixel-Square.otf",
+      "idiom" : "universal"
+    }
+  ]
+}
