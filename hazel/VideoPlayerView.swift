@@ -6,6 +6,7 @@ class VideoPlayerView: NSView {
     private var playerLooper: AVPlayerLooper?
     private var playerLayer: AVPlayerLayer?
     private var currentURL: URL?
+    private var currentIsLooping: Bool = true
 
     var isPlaying: Bool {
         player?.rate ?? 0 > 0
@@ -24,6 +25,7 @@ class VideoPlayerView: NSView {
     func loadVideo(url: URL, isLooping: Bool = true) {
         cleanup()
         currentURL = url
+        currentIsLooping = isLooping
 
         var securityScoped = false
         if url.startAccessingSecurityScopedResource() {
@@ -59,7 +61,7 @@ class VideoPlayerView: NSView {
     
     func reloadWithSettings() {
         guard let url = currentURL else { return }
-        loadVideo(url: url)
+        loadVideo(url: url, isLooping: currentIsLooping)
     }
 
     func play() {

@@ -94,7 +94,7 @@ class ManagementWindowController: NSObject {
             defer: false
         )
 
-        newPanel.title = "Hazel"
+        newPanel.title = "hazel"
         newPanel.contentView = hostingView
         newPanel.isReleasedWhenClosed = false
         newPanel.level = .floating

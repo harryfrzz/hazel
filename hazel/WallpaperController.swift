@@ -99,6 +99,7 @@ class WallpaperController: ObservableObject {
 
     func setWallpaper(_ item: WallpaperItem) {
         isActive = true
+        store.setActiveWallpaper(item)
 
         for screen in NSScreen.screens {
             if wallpaperWindows[screen] == nil {
@@ -106,13 +107,14 @@ class WallpaperController: ObservableObject {
             }
         }
 
-        guard let url = store.resolveBookmark(item.url) else {
+        guard let activeItem = store.activeWallpaper,
+              let url = store.resolveBookmark(activeItem.url) else {
             print("Failed to resolve bookmark URL")
             return
         }
 
         for (_, entry) in wallpaperWindows {
-            entry.playerView.loadVideo(url: url)
+            entry.playerView.loadVideo(url: url, isLooping: activeItem.isLooping)
         }
     }
 
