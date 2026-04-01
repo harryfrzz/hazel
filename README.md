@@ -35,3 +35,12 @@ A free & open source macOS live wallpaper app that plays videos as your desktop 
 
 ## Contributions
 I’d love to hear your thoughts and feel free to contribute if you’d like! ❤️
+
+## Credits
+Special thanks to the original artist for the app icon used in Hazel ✨
+<br></br>
+Pinterest: https://in.pinterest.com/kyurakatsuya/
+<br></br>
+Instagram: https://www.instagram.com/_lunara28
+<br></br>
+**All rights belong to the respective creator**
