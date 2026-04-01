@@ -9,7 +9,8 @@ A free & open source macOS live wallpaper app that plays videos as your desktop 
 - Set any video as your live wallpaper
 - Loop or play once options
 - Mute/unmute audio
-- App Hides into menu bar (no dock icon)
+- App Hides into menu bar
+- Low resource usage
 
 ## Installation
 
